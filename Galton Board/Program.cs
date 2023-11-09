@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-var watch = Stopwatch.StartNew();//
+var watch = Stopwatch.StartNew();
 
 int ballCount = 5;
 int layerCount = 18;//18 = 171pins
@@ -23,22 +23,23 @@ for (int i = 0; i < tasks.Length; i++)
     tasks[i] = Task.Run(() =>
     {
         TryCounts.Add(CreateBallsAndFell());
-        //Console.WriteLine("Thread finished");
-        //Console.WriteLine("=============================");
+        Console.WriteLine("Thread finished");
+        Console.WriteLine("=============================");
     });
 }
 
 Task.WaitAll(tasks);
 
-//int j = 0;
-//foreach (int tryCount in TryCounts)
-//{
-//    j++;
-//    Console.WriteLine("Thread" + TurnNumberToString(j) + ": " + tryCount);
-//}
+int j = 0;
+foreach (int tryCount in TryCounts)
+{
+    j++;
+    Console.WriteLine("Thread" + TurnNumberToString(j) + ": " + tryCount);
+}
 
 watch.Stop();
-Console.WriteLine($"The Execution time of the program is {watch.ElapsedMilliseconds}ms");//349ms, 375ms, 454ms, 406ms, 367ms
+Console.WriteLine($"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
+//349ms, 375ms, 454ms, 406ms, 367ms on ryzen 3600
 
 while (true)
 {
@@ -119,7 +120,7 @@ class ball
 
     public void GoToBottom()
     {
-        var bitArray = new BitArray(BitConverter.GetBytes(rndNumber));//3456213 = 010110010010011100101
+        var bitArray = new BitArray(BitConverter.GetBytes(rndNumber));
 
         for (int horizontalPos = 0; horizontalPos < layerCount; horizontalPos++)
         {
